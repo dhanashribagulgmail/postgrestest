@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add new Patient</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'main.css' %}">
+    <script src="{% static 'main.js' %}"></script>
+    <style>
+        .registration-box {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .registration-box h2 {
+            margin-bottom: 20px;
+        }
+        
+        .registration-box .form-control {
+            margin-bottom: 15px;
+        }
+        
+        .registration-box .btn {
+            width: 48%; /* Adjust the button width as desired */
+            margin-right: 2%; /* Adjust the space between buttons */
+            margin-bottom: 10px;
+        }
+
+        .registration-box .text-center {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body style="background-color: #cfe4f7;">
+    <div class="container mt-5">
+
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid d-flex justify-content-end"> <!-- Flex container with justify-content-end -->
+                <form>
+                  {% if request.user.is_authenticated %}
+                    <a href="/logout/" class="btn btn-outline-success" type="submit">Logout</a>
+                    {% else %}
+                    <a href="/login/" class="btn btn-outline-success" type="submit">Login</a>
+                    {% endif %}
+                </form>
+            </div>
+        </nav>
+        
+        <form class="registration-box col-6 mx-auto card-p3 shadow-lg" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2>Add  new Patient </h2>
+            <hr>
+
+            {% if messages %}
+            <div class="alert alert-primary" role="alert">
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+
+            
+
+            
+
+              
+                <hr>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Patient Name</label>
+                    <input type="text" name="name" required class="form-control" id="name">
+                </div>
+                <div class="mb-3">
+                    <label for="age" class="form-label">Age</label>
+                    <input type="text" name="age" required class="form-control" id="age">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" name="email" required class="form-control" id="email">
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Address</label>
+                    <textarea class="form-control" required name="address"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="photo" class="form-label">Patient Photo</label>
+                    <input type="file" name="patient_photo" class="form-control" id="photo">
+                </div>
+
+           
+            
+            
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-secondary">Clear</button>
+                
+            </div>
+        </form>
+    </div>
+</body>
+</html>
